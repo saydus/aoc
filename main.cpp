@@ -7,10 +7,9 @@
 #include <unordered_set>
 #include <set>
 #include <algorithm>
+using namespace std;
 
-const std::string INPUT_DIRECTORY = "../inputs/";
-
-
+const string INPUT_DIRECTORY = "../inputs/";
 
 
 /*
@@ -29,7 +28,6 @@ char parseInput(std::string inputLine, std::pair<int, int>& boundaries, std::str
 
     return inputLine[spacePos + 1];
 }
-
 
 
 
@@ -53,8 +51,10 @@ void solution2(){
     }
 
     std::cout << "Solution to 2: " << answer << std::endl;
-
 }
+
+
+
 
 
 

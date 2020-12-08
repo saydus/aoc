@@ -27,7 +27,6 @@ char parseInput(std::string inputLine, std::pair<int, int>& boundaries, std::str
 
 
 
-
 void solution2(){
     std::ifstream file(INPUT_DIRECTORY + "input2.txt");
     assert(file.is_open());
