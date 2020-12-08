@@ -12,74 +12,44 @@ using namespace std;
 const string INPUT_DIRECTORY = "../inputs/";
 
 
+bool isValid(){
 
-int simulate(vector<pair<string, int>> & program){
-    int accum = 0;
-    set<int> visitedLines;
-
-    for (int i = 0; i < program.size(); ++i) {
-        if (visitedLines.find(i) != visitedLines.end()){
-            return 0;
-        }
-
-        visitedLines.insert(i);
-        string command = program[i].first;
-        int argument  = program[i].second;
-
-        if (command == "acc"){
-            accum += argument;
-        }
-        else if (command == "jmp"){
-            i += argument - 1;
-        }
-    }
-
-    return accum;
 }
 
+void solution4(){
+    vector<string> fields = {"byr", "iyr", "eyr", "hgt", "hcl", "ecl", "pid"};
 
-void solution8(){
-    std::ifstream file(INPUT_DIRECTORY + "input8.txt");
+    ifstream file(INPUT_DIRECTORY + "input4.txt");
     assert(file.is_open());
 
-    vector<pair<string, int>> program;
-    string line;
-    while(getline(file, line)){
-        program.push_back({line.substr(0, line.find(' ')), stoi(line.substr(line.find(' ') + 1))});
+
+    int validPassports = 0;
+    string creds;
+    std::string credentials;
+    while(getline(file, credentials)){
+        if(credentials == ""){
+            bool valid = true;
+            for (auto i : fields) {
+                if (creds.find(i) == string::npos){
+                    valid = false;
+                } else{
+//                    valid = isValid(creds[i]);
+                }
+            }
+            if (valid) ++validPassports;
+            creds.clear();
+        }
+        else {
+            creds += credentials;
+        }
     }
 
-    for (int i = 0; i < program.size(); ++i) {
-        string command = program[i].first;
-
-        if (program[i].first  == "jmp"){
-            program[i].first = "nop";
-            int accum = simulate(program);
-            if (accum != 0){
-                cout << "Solution: " << accum;
-            }
-            program[i].first = "jmp";
-        }
-
-        else if (program[i].first  == "nop"){
-            program[i].first = "jmp";
-            int accum = simulate(program);
-            if (accum != 0){
-                cout << "Solution: " << accum;
-            }
-            program[i].first = "nop";
-        }
-
-    }
-
+    cout << "Answer 4: " << validPassports << endl;
 }
-
-
-
-
 
 
 
 int main() {
-    solution8();
+    solution4();
     return 0;
 }
