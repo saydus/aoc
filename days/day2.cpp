@@ -1,11 +1,6 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-#include <unordered_map>
-#include <list>
-#include <vector>
-#include <unordered_set>
-#include <set>
 #include <algorithm>
 
 const std::string INPUT_DIRECTORY = "../inputs/";
@@ -53,14 +48,7 @@ void solution2(){
     }
 
     std::cout << "Solution to 2: " << answer << std::endl;
-
 }
 
 
 
-
-
-int main() {
-    solution2();
-    return 0;
-}
