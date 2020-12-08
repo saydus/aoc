@@ -10,6 +10,42 @@
 const std::string INPUT_DIRECTORY = "../inputs/";
 
 
+/*
+ * PROBLEM 1
+ */
+void solution1(){
+    std::ifstream file(INPUT_DIRECTORY + "input1.txt");
+    int target = 2020;
+    std::unordered_map<int, int> subToNum;
+    int answer;
+
+    if (file.is_open()){
+        std::string numStr;
+        while(getline(file, numStr)){
+            int num = std::stoi(numStr);
+            if (subToNum.find(num) != subToNum.end()){
+                answer = subToNum[num] * num;
+                break;
+            }
+            else{
+                subToNum[target - num] = num;
+            }
+        }
+    } else{
+        std::cout << "Unable to open file";
+    }
+
+    std::cout << "Solution 1: " << answer << std::endl;
+}
+
+
+
+
+
+/*
+ * PROBLEM 7
+ */
+
 void parseEdges(std::string edge, std::string& outcomingNode, std::vector<std::string>& incomingNodes){
     outcomingNode = edge.substr(0, edge.find("bags") - 1);
     std::string incomingString = edge.substr(edge.find("bags contain ") + 13);
@@ -53,28 +89,25 @@ void solution7(){
 
 
     std::ifstream file(INPUT_DIRECTORY + "input7.txt");
+    assert(file.is_open());
 
     // Parse the input into an adjacency list
     std::unordered_map<std::string, std::set<std::string>> adjacencyList;
     std::string edge;
-    if (file.is_open())
-    {
-        while ( getline (file,edge) )
-        {
-            // Parse the edge of the graph in reverse order for traversal
-            std::string outcomingNode;
-            std::vector<std::string> incomingNodes;
-            parseEdges(edge, outcomingNode, incomingNodes);
 
-            for (auto i : incomingNodes) {
-                adjacencyList[i].insert(outcomingNode);
-            }
+    while ( getline (file,edge) )
+    {
+        // Parse the edge of the graph in reverse order for traversal
+        std::string outcomingNode;
+        std::vector<std::string> incomingNodes;
+        parseEdges(edge, outcomingNode, incomingNodes);
+
+        for (auto i : incomingNodes) {
+            adjacencyList[i].insert(outcomingNode);
         }
-        file.close();
     }
-    else {
-        std::cout << "Unable to open file";
-    }
+    file.close();
+
 
     std::unordered_set<std::string> bagsOfTarget;
     addAllNodes(bagsOfTarget, target, adjacencyList);
@@ -85,30 +118,7 @@ void solution7(){
 
 
 
-void solution1(){
-    std::ifstream file(INPUT_DIRECTORY + "input1.txt");
-    int target = 2020;
-    std::unordered_map<int, int> subToNum;
-    int answer;
 
-    if (file.is_open()){
-        std::string numStr;
-        while(getline(file, numStr)){
-            int num = std::stoi(numStr);
-            if (subToNum.find(num) != subToNum.end()){
-                answer = subToNum[num] * num;
-                break;
-            }
-            else{
-                subToNum[target - num] = num;
-            }
-        }
-    } else{
-        std::cout << "Unable to open file";
-    }
-
-    std::cout << "Solution 1: " << answer << std::endl;
-}
 
 int main() {
     std::cout << "Solutions to AOC 2020!" << std::endl;
