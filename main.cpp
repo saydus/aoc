@@ -22,7 +22,7 @@ void parseEdges(std::string edge, std::string& outcomingNode, std::vector<std::s
 
         for (int i = 0; i < incomingString.size(); ++i) {
             if (incomingString[i] == ',' || incomingString[i] == '.'){
-                incomingNodes.push_back(currentStr.substr(0, currentStr.find(" bags")));
+                incomingNodes.push_back(currentStr.substr(0, currentStr.find(" bag")));
                 currentStr = "";
                 ++i;
             }
