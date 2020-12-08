@@ -10,9 +10,6 @@
 const std::string INPUT_DIRECTORY = "../inputs/";
 
 
-
-
-
 void parseEdges(std::string edge, std::string& outcomingNode, std::vector<std::string>& incomingNodes){
     outcomingNode = edge.substr(0, edge.find("bags") - 1);
     std::string incomingString = edge.substr(edge.find("bags contain ") + 13);
@@ -82,12 +79,40 @@ void solution7(){
     std::unordered_set<std::string> bagsOfTarget;
     addAllNodes(bagsOfTarget, target, adjacencyList);
 
-    std::cout << "Solution 7: " << bagsOfTarget.size();
+    std::cout << "Solution 7: " << bagsOfTarget.size() << std::endl;
 }
 
 
+
+
+void solution1(){
+    std::ifstream file(INPUT_DIRECTORY + "input1.txt");
+    int target = 2020;
+    std::unordered_map<int, int> subToNum;
+    int answer;
+
+    if (file.is_open()){
+        std::string numStr;
+        while(getline(file, numStr)){
+            int num = std::stoi(numStr);
+            if (subToNum.find(num) != subToNum.end()){
+                answer = subToNum[num] * num;
+                break;
+            }
+            else{
+                subToNum[target - num] = num;
+            }
+        }
+    } else{
+        std::cout << "Unable to open file";
+    }
+
+    std::cout << "Solution 1: " << answer << std::endl;
+}
+
 int main() {
     std::cout << "Solutions to AOC 2020!" << std::endl;
+    solution1();
     solution7();
 
 
