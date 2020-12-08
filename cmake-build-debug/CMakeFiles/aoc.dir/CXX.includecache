@@ -9,4 +9,18 @@
 /Users/saydus/Desktop/aoc/main.cpp
 iostream
 -
+fstream
+-
+string
+-
+unordered_map
+-
+list
+-
+vector
+-
+unordered_set
+-
+set
+-
 
